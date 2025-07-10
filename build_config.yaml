@@ -1,0 +1,42 @@
+# Frappe Docker Build Configuration
+# This file can be used to store build configurations for different environments
+
+# Default configuration
+default:
+  build_method: layered
+  apps_file: apps.json
+  tag: frappe_custom:latest
+  frappe_path: https://github.com/frappe/frappe
+  frappe_branch: version-15
+
+# Development configuration
+development:
+  build_method: layered
+  apps_file: apps.json
+  tag: frappe_custom:dev
+  frappe_branch: develop
+
+# Production configuration
+production:
+  build_method: custom
+  apps_file: apps_production.json
+  tag: mycompany/frappe:v15.0.0
+  frappe_branch: version-15
+  python_version: 3.11.9
+  node_version: 20.19.2
+  debian_base: bookworm
+
+# Custom apps configuration
+custom_apps:
+  build_method: layered
+  apps_file: custom_apps.json
+  tag: frappe_custom:with_custom_apps
+  frappe_branch: version-15
+
+# Testing configuration
+testing:
+  build_method: layered
+  apps_file: apps_test.json
+  tag: frappe_custom:test
+  frappe_branch: version-15
+  dry_run: true
